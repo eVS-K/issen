@@ -1,0 +1,819 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>一閃賭場 公式ルールブック</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@400;700;900&family=Shippori+Mincho+B1:wght@400;700;800&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --bg:#060402;
+  --surface:#0c0805;
+  --surface2:#120e08;
+  --border:#221608;
+  --border2:#3a2610;
+  --text:#ede0c0;
+  --text2:#9a8560;
+  --text3:#4a3825;
+  --red:#7a1515;
+  --red2:#a82e2e;
+  --gold:#b8962e;
+  --gold2:#d4a83c;
+  --gold3:#6a5020;
+  --gold4:#e8c870;
+  --ink:#d0b87c;
+}
+
+/* ── ノイズテクスチャSVGを背景に重ねて紙の質感を演出 ── */
+body{
+  font-family:'Shippori Mincho B1','Noto Serif JP',serif;
+  background:var(--bg);color:var(--text);
+  line-height:1.9;font-size:14px;
+  position:relative;
+}
+body::before{
+  content:'';position:fixed;inset:0;pointer-events:none;z-index:0;
+  background-image:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");
+  opacity:.6;mix-blend-mode:multiply;
+}
+body>*{position:relative;z-index:1}
+a{color:var(--gold2);text-decoration:none}
+
+/* ─── 縦線装飾 ─── */
+body::after{
+  content:'';position:fixed;left:0;top:0;bottom:0;width:3px;
+  background:linear-gradient(180deg,transparent,var(--gold3) 20%,var(--gold3) 80%,transparent);
+  pointer-events:none;z-index:10;opacity:.5
+}
+
+/* ─── HEADER ─── */
+header{
+  text-align:center;padding:56px 24px 44px;
+  background:linear-gradient(180deg,#160a02 0%,#0a0603 60%,var(--bg) 100%);
+  border-bottom:1px solid var(--gold3);position:relative;overflow:hidden
+}
+/* 角の装飾 */
+header::before{
+  content:'';position:absolute;top:14px;left:14px;right:14px;bottom:0;
+  border-top:1px solid var(--gold3);border-left:1px solid var(--gold3);
+  border-right:1px solid var(--gold3);pointer-events:none;opacity:.4
+}
+.h-bg-char{
+  position:absolute;font-size:200px;font-weight:900;
+  color:rgba(184,150,46,0.03);user-select:none;pointer-events:none;
+  font-family:'Shippori Mincho B1',serif;letter-spacing:0;line-height:1
+}
+.h-bg-char.c1{left:-24px;top:-10px}
+.h-bg-char.c2{right:-24px;bottom:-30px}
+.badge{
+  display:inline-block;font-size:9px;letter-spacing:6px;
+  color:var(--gold3);border-top:1px solid var(--gold3);border-bottom:1px solid var(--gold3);
+  padding:4px 18px;margin-bottom:22px;
+  font-family:'Noto Serif JP',serif
+}
+h1{
+  font-size:62px;font-weight:900;color:var(--gold);letter-spacing:8px;
+  margin-bottom:4px;
+  text-shadow:0 0 40px rgba(184,150,46,0.25),0 2px 0 rgba(0,0,0,0.8);
+  font-family:'Shippori Mincho B1',serif
+}
+.furigana-block{
+  display:block;font-size:11px;color:var(--text2);letter-spacing:9px;
+  margin-bottom:6px;font-family:'Noto Serif JP',serif
+}
+.sub1{font-size:10px;color:var(--text3);letter-spacing:8px;margin-bottom:24px;font-family:'Noto Serif JP',serif}
+.orn{display:flex;align-items:center;justify-content:center;gap:14px;margin:20px auto}
+.orn-l{width:90px;height:1px;background:linear-gradient(90deg,transparent,var(--gold3))}
+.orn-r{width:90px;height:1px;background:linear-gradient(90deg,var(--gold3),transparent)}
+.orn-d{width:7px;height:7px;background:var(--gold);transform:rotate(45deg)}
+.orn-d2{width:4px;height:4px;border:1px solid var(--gold3);transform:rotate(45deg)}
+.tagline{font-size:12px;color:var(--text2);letter-spacing:3px;font-style:italic;margin-top:4px}
+
+/* ─── NAV ─── */
+nav{
+  position:sticky;top:0;z-index:100;
+  background:rgba(6,4,2,0.97);backdrop-filter:blur(12px);
+  border-bottom:1px solid var(--border2);
+  overflow-x:auto;scrollbar-width:none;-webkit-overflow-scrolling:touch
+}
+nav::-webkit-scrollbar{display:none}
+.nav-inner{display:flex;min-width:max-content}
+nav a{
+  display:block;padding:11px 16px;font-size:10px;color:var(--text3);
+  white-space:nowrap;border-bottom:2px solid transparent;
+  letter-spacing:2px;transition:color .25s,border-color .25s;text-decoration:none;
+  font-family:'Noto Serif JP',serif
+}
+nav a:hover{color:var(--gold);border-bottom-color:var(--gold3)}
+
+/* ─── MAIN LAYOUT ─── */
+main{max-width:740px;margin:0 auto;padding:0 20px 90px}
+
+/* ─── SECTIONS ─── */
+.sec{margin-top:44px;scroll-margin-top:48px}
+.sec-head{display:flex;align-items:center;gap:14px;margin-bottom:22px}
+.sec-num{
+  font-size:9px;font-weight:700;color:var(--red2);
+  border:1px solid var(--red);padding:3px 9px;letter-spacing:2px;flex-shrink:0;
+  font-family:'Noto Serif JP',serif
+}
+.sec-title{font-size:19px;font-weight:800;color:var(--gold2);letter-spacing:4px;
+  font-family:'Shippori Mincho B1',serif}
+.sec-rule{flex:1;height:1px;background:linear-gradient(90deg,var(--gold3) 0%,transparent 80%)}
+
+/* ─── CARDS ─── */
+.card{
+  background:var(--surface);
+  border:1px solid var(--border2);
+  border-left:3px solid var(--gold3);
+  padding:18px 22px;margin-bottom:12px;
+  position:relative;
+}
+/* 右下角の装飾 */
+.card::after{
+  content:'';position:absolute;right:6px;bottom:6px;
+  width:10px;height:10px;
+  border-right:1px solid var(--border2);border-bottom:1px solid var(--border2);
+  pointer-events:none;opacity:.6
+}
+.card.red{border-left-color:var(--red)}
+.card.gold{border-left-color:var(--gold)}
+.card-t{
+  font-size:11px;font-weight:700;color:var(--gold);letter-spacing:3px;
+  margin-bottom:10px;display:flex;align-items:center;gap:8px;
+  font-family:'Noto Serif JP',serif
+}
+.card-t::before{content:'';width:3px;height:12px;background:var(--gold);display:inline-block;flex-shrink:0}
+.card p{color:var(--text);font-size:13px;margin-bottom:6px}
+.card p:last-child{margin-bottom:0}
+.card ul{padding-left:1.3em;margin-top:4px}
+.card li{font-size:13px;margin-bottom:5px;color:var(--text)}
+.card li::marker{color:var(--gold3)}
+
+/* ─── ROLE GRID ─── */
+.role-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:12px}
+@media(max-width:480px){.role-grid{grid-template-columns:1fr}}
+.role-card{
+  background:var(--surface);border:1px solid var(--border2);
+  border-top:3px solid var(--gold3);padding:24px 18px;text-align:center;
+  position:relative;
+}
+.role-card::before{
+  content:'';position:absolute;top:8px;left:8px;right:8px;bottom:8px;
+  border:1px solid rgba(106,80,32,0.15);pointer-events:none
+}
+.role-card.red-top{border-top-color:var(--red2)}
+.r-icon{font-size:28px;margin-bottom:10px}
+.r-name{font-size:17px;font-weight:800;color:var(--gold);letter-spacing:4px;margin-bottom:2px;
+  font-family:'Shippori Mincho B1',serif}
+.r-name.red{color:var(--red2)}
+.r-sub{font-size:9px;color:var(--text3);letter-spacing:4px;margin-bottom:14px;font-family:'Noto Serif JP',serif}
+.r-fee-label{font-size:10px;color:var(--text3);letter-spacing:1px;margin-bottom:2px}
+.r-fee{font-size:26px;font-weight:900;color:var(--gold2);margin-bottom:2px;
+  font-family:'Shippori Mincho B1',serif}
+.r-fee.red{color:var(--red2)}
+.r-desc{font-size:11px;color:var(--text2);margin-top:10px;line-height:1.8}
+.obs-card{
+  background:var(--surface);border:1px solid var(--border2);
+  padding:14px 22px;display:flex;align-items:center;gap:16px;margin-bottom:12px
+}
+.obs-icon{font-size:22px;flex-shrink:0}
+
+/* ─── POINTS ─── */
+.pts-hero{
+  background:var(--surface);
+  border:1px solid var(--gold3);
+  border-top:3px solid var(--gold);
+  padding:28px;text-align:center;margin-bottom:12px;position:relative
+}
+.pts-hero::before{
+  content:'換算';position:absolute;top:-10px;left:50%;transform:translateX(-50%);
+  font-size:9px;letter-spacing:4px;color:var(--gold3);
+  background:var(--bg);padding:0 10px;font-family:'Noto Serif JP',serif
+}
+.pts-eq{font-size:20px;color:var(--text2);margin-bottom:8px}
+.pts-eq strong{color:var(--gold2);font-size:32px;font-weight:900;
+  font-family:'Shippori Mincho B1',serif}
+.pts-note{font-size:10px;color:var(--text3);letter-spacing:3px;margin-top:8px;font-family:'Noto Serif JP',serif}
+
+/* ─── TABLE ─── */
+.tbl-wrap{overflow-x:auto;margin-bottom:12px}
+table{width:100%;border-collapse:collapse;font-size:13px;min-width:320px}
+th{
+  background:var(--surface2);color:var(--gold);padding:10px 16px;
+  text-align:left;font-weight:700;letter-spacing:2px;
+  border-bottom:2px solid var(--gold3);font-size:10px;
+  font-family:'Noto Serif JP',serif
+}
+td{padding:10px 16px;border-bottom:1px solid var(--border);background:var(--surface)}
+tr:last-child td{border-bottom:none}
+tr:nth-child(even) td{background:var(--surface2)}
+.td-g{color:var(--gold2);font-weight:700}
+.td-r{color:var(--red2);font-weight:700}
+
+/* ─── STEPS ─── */
+.steps{margin-bottom:12px}
+.step{display:flex;gap:16px;margin-bottom:10px;align-items:flex-start}
+.step-n{
+  width:30px;height:30px;flex-shrink:0;background:var(--red);
+  color:var(--text);font-size:11px;font-weight:700;
+  display:flex;align-items:center;justify-content:center;
+  font-family:'Noto Serif JP',serif
+}
+.step-c{padding-top:5px;font-size:13px;line-height:1.8}
+.step-c strong{color:var(--gold);font-weight:700}
+
+/* ─── ALERTS ─── */
+.alert{
+  background:var(--surface);border:1px solid var(--border2);
+  border-left:4px solid var(--red2);
+  padding:14px 18px;margin-bottom:10px;
+  display:flex;gap:14px;align-items:flex-start
+}
+.alert-icon{font-size:18px;flex-shrink:0;margin-top:2px}
+.alert-body{font-size:13px}
+.alert-title{
+  font-size:10px;font-weight:700;color:var(--red2);
+  letter-spacing:3px;margin-bottom:4px;font-family:'Noto Serif JP',serif
+}
+.alert.gold-al{border-left-color:var(--gold)}
+.alert.gold-al .alert-title{color:var(--gold)}
+
+/* ─── 色バッジ（挑戦者識別色）─── */
+.num-badge-row{display:flex;gap:14px;margin:14px 0 6px;flex-wrap:wrap;align-items:flex-start}
+.num-badge{
+  width:52px;height:52px;border:2px solid var(--gold3);
+  display:flex;align-items:center;justify-content:center;
+  font-size:13px;font-weight:900;color:#fff;
+  background:var(--surface2);
+  font-family:'Shippori Mincho B1',serif;flex-shrink:0;
+  letter-spacing:1px;text-shadow:0 1px 3px rgba(0,0,0,0.7)
+}
+.num-badge.aka{ background:#8b1a1a;border-color:#c04040;color:#ffe0e0 }
+.num-badge.ao { background:#1a3a6e;border-color:#4070c0;color:#ddeeff }
+.num-badge.ki { background:#6b5500;border-color:#c09a20;color:#fff8cc }
+.num-badge-label{font-size:11px;color:var(--text2);margin-top:5px;letter-spacing:1px;text-align:center}
+/* 縦斬り強調バッジ */
+.tate-badge{
+  display:inline-flex;align-items:center;gap:6px;
+  background:#2a0a0a;border:2px solid var(--red2);
+  color:var(--red2);font-size:13px;font-weight:900;letter-spacing:3px;
+  padding:8px 18px;margin:10px 0 4px;
+  font-family:'Shippori Mincho B1',serif
+}
+
+/* ─── STAMPS ─── */
+.stamp-box{
+  background:var(--surface);border:1px solid var(--border2);
+  padding:26px;text-align:center;margin-bottom:12px;position:relative
+}
+.stamp-row{display:flex;justify-content:center;gap:14px;margin-bottom:18px}
+.stamp-c{
+  width:52px;height:52px;border:2px solid var(--gold3);
+  display:flex;align-items:center;justify-content:center;
+  font-size:20px;color:var(--gold);transform:rotate(-2deg);
+  background:var(--surface2)
+}
+.stamp-lbl{font-size:12px;color:var(--text2);letter-spacing:2px;font-family:'Noto Serif JP',serif}
+.stamp-reward{
+  background:var(--surface2);border:1px solid var(--gold3);
+  padding:12px 20px;font-size:13px;color:var(--gold2);margin-top:14px;font-weight:700
+}
+
+/* ─── RANKING ─── */
+.rank-item{
+  display:flex;align-items:center;gap:18px;
+  padding:14px 20px;background:var(--surface);
+  border:1px solid var(--border2);margin-bottom:8px;
+  border-left:3px solid var(--gold3)
+}
+.rank-n{font-size:24px;font-weight:900;width:36px;text-align:center;
+  font-family:'Shippori Mincho B1',serif}
+.rank-g{color:var(--gold)}
+.rank-s{color:#b0b0b0}
+.rank-b{color:#cd7f32}
+.rank-prize{font-size:13px;color:var(--gold2);font-weight:700}
+.rank-sub{font-size:11px;color:var(--text2);margin-top:2px}
+
+/* ─── 区切り装飾 ─── */
+.divider{
+  display:flex;align-items:center;gap:10px;margin:20px 0 14px;
+  color:var(--text3);font-size:10px;letter-spacing:4px;
+  font-family:'Noto Serif JP',serif
+}
+.divider::before,.divider::after{
+  content:'';flex:1;height:1px;
+  background:linear-gradient(90deg,transparent,var(--border2),transparent)
+}
+
+/* ─── CLOSING BOX ─── */
+.closing{
+  background:var(--surface);
+  border:1px solid var(--gold3);
+  border-top:3px solid var(--gold);
+  padding:32px;text-align:center;margin-top:48px;position:relative
+}
+.closing::before{
+  content:'';position:absolute;top:8px;left:8px;right:8px;bottom:8px;
+  border:1px solid rgba(106,80,32,0.2);pointer-events:none
+}
+.closing h3{font-size:12px;color:var(--gold);letter-spacing:6px;margin-bottom:14px;
+  font-family:'Noto Serif JP',serif}
+.closing p{font-size:12px;color:var(--text2);line-height:2.2}
+.closing .accent{color:var(--gold2);letter-spacing:4px;font-size:14px;font-weight:800;
+  font-family:'Shippori Mincho B1',serif;display:block;margin-top:6px}
+
+/* ─── FOOTER ─── */
+footer{
+  text-align:center;padding:30px;
+  border-top:1px solid var(--border2);margin-top:60px
+}
+.footer-mark{font-size:30px;color:var(--gold3);margin-bottom:8px}
+.footer-line{width:60px;height:1px;background:var(--gold3);margin:8px auto}
+.footer-text{font-size:9px;color:var(--text3);letter-spacing:6px;
+  font-family:'Noto Serif JP',serif}
+.placeholder{
+  display:inline-block;min-width:60px;padding:1px 8px;
+  background:var(--surface2);border:1px dashed var(--gold3);
+  color:var(--gold3);font-size:12px;letter-spacing:1px;vertical-align:baseline
+}
+
+/* ─── 秘密バッジ（賭けた場所は非公開）─── */
+.secret-badge{
+  display:inline-flex;align-items:center;gap:6px;
+  background:var(--surface2);border:1px solid var(--red);
+  color:var(--red2);font-size:11px;letter-spacing:2px;
+  padding:5px 14px;margin:8px 0;
+  font-family:'Noto Serif JP',serif
+}
+</style>
+</head>
+<body>
+
+<!-- ━━━ HEADER ━━━ -->
+<header>
+  <div class="h-bg-char c1">一</div>
+  <div class="h-bg-char c2">閃</div>
+  <div class="badge">Official Rule Book</div>
+  <h1>一閃賭場</h1>
+  <span class="furigana-block">いっせんとじょう</span>
+  <div class="sub1">Issento-jou</div>
+  <div class="orn">
+    <div class="orn-l"></div>
+    <div class="orn-d2"></div>
+    <div class="orn-d"></div>
+    <div class="orn-d2"></div>
+    <div class="orn-r"></div>
+  </div>
+  <p class="tagline">気配を見切る剣士の一閃に、賭けよ。</p>
+</header>
+
+<!-- ━━━ NAV ━━━ -->
+<nav>
+  <div class="nav-inner">
+    <a href="#s1">§1　気配切りとは</a>
+    <a href="#s2">§2　参加方法</a>
+    <a href="#s3">§3　通貨「閃」</a>
+    <a href="#s4">§4　賭けの流れ</a>
+    <a href="#s5">§5　挑戦の流れ</a>
+    <a href="#s6">§6　スタンプ特典</a>
+    <a href="#s7">§7　景品交換</a>
+    <a href="#s8">§8　ランキング</a>
+    <a href="#s9">§9　禁則事項</a>
+  </div>
+</nav>
+
+<!-- ━━━ MAIN ━━━ -->
+<main>
+
+<!-- §1 -->
+<div class="sec" id="s1">
+  <div class="sec-head">
+    <div class="sec-num">§ 01</div>
+    <div class="sec-title">気配切りとは</div>
+    <div class="sec-rule"></div>
+  </div>
+  <div class="card gold">
+    <p>目隠しをした挑戦者が、<strong style="color:var(--gold2)">一切の視覚を封じた状態で、音と気配のみを頼りに標的を仕留める試技。</strong>果たして剣の一閃は命中するのか——それを読み切ることが、賭博者の真の力量となる。</p>
+  </div>
+  <div class="card">
+    <div class="card-t">試合の形式</div>
+    <p>挑戦者は<strong>二人または三人</strong>で一組となり、それぞれに<strong style="color:var(--gold2)">赤・青・黄</strong>の識別色が割り当てられ、対応するゼッケンを着用する。目隠しをして教室中央に立ち、静粛の中で気配から相手を見極め、一撃を放つ。観客は試技が終わるまで、いかなる声も発してはならない。</p>
+    <p style="color:var(--red2);margin-top:8px;">★ 気配切りは静寂の中に成立する。</p>
+  </div>
+  <div class="card red">
+    <div class="card-t">試合の詳細ルール</div>
+    <ul>
+      <li><strong style="color:var(--gold)">開始前</strong>　目隠しを装着した後、スタッフによるぐるぐるバットを行い、方向感覚をリセットする</li>
+      <li><strong style="color:var(--gold)">脱落判定</strong>　相手の斬撃を受けた挑戦者はその場で脱落となる</li>
+      <li>
+        <strong style="color:var(--gold)">斬撃の制限</strong>　有効な斬り方は下記のみ
+        <div class="tate-badge">⬇ 縦 斬 り の み ⬇</div>
+        <div style="font-size:12px;color:var(--red2);font-weight:700;margin-bottom:4px;">横斬り・突きは無効とする</div>
+      </li>
+      <li><strong style="color:var(--gold)">振り方の注意</strong>　安全のため、強く振り抜くことを禁ずる。力加減はスタッフの指示に従うこと</li>
+      <li><strong style="color:var(--gold)">制限時間</strong>　<strong style="color:var(--gold2)">一分三十秒</strong>。時間内に決着がつかない場合は<strong>引き分け</strong>とする</li>
+      <li><strong style="color:var(--gold)">終了条件</strong>　最後の一人になった時点、または制限時間到達をもって試合終了</li>
+    </ul>
+  </div>
+  <div class="card">
+    <div class="card-t">判定について</div>
+    <p><strong style="color:var(--gold2)">審判官（兼司会）</strong>が命中を確認し、勝敗を宣告する。審判官の判定は最終決定とし、いかなる場合も選手・観客からの覆しは認めない。</p>
+    <p style="margin-top:8px;">なお、下記の場合にはやり直しを宣告することがある。</p>
+    <ul style="margin-top:6px">
+      <li>判定があいまいで命中の有無が確認できなかった場合</li>
+      <li>挑戦者が指定の枠外に出た場合（スタッフ判断による）</li>
+    </ul>
+  </div>
+</div>
+
+<!-- §2 -->
+<div class="sec" id="s2">
+  <div class="sec-head">
+    <div class="sec-num">§ 02</div>
+    <div class="sec-title">参加方法</div>
+    <div class="sec-rule"></div>
+  </div>
+  <div class="role-grid">
+    <div class="role-card">
+      <div class="r-icon">🎲</div>
+      <div class="r-name">賭博者</div>
+      <div class="r-sub">GAMBLER</div>
+      <div class="r-fee-label">参加費（いずれか選択）</div>
+      <div class="r-fee">100 / 200 円</div>
+      <div class="r-desc">挑戦者の勝敗に賭けるプレイヤー。番号付きの席に座り、スタッフが来たタイミングで賭け先と閃を渡す。<strong style="color:var(--red2);font-size:12px;">三試合すべてで賭けることが必須。</strong></div>
+    </div>
+    <div class="role-card red-top">
+      <div class="r-icon">⚔️</div>
+      <div class="r-name red">挑戦者</div>
+      <div class="r-sub">CHALLENGER</div>
+      <div class="r-fee-label">参加費</div>
+      <div class="r-fee red">100 円</div>
+      <div class="r-desc">実際に気配切りに挑む剣士。二人または三人一組で出場し、赤・青・黄のゼッケンが割り当てられる。試合後は全員に参加賞のお菓子を進呈。</div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-t">挑戦者の識別色について</div>
+    <div class="num-badge-row">
+      <div>
+        <div class="num-badge aka">赤</div>
+        <div class="num-badge-label">赤ゼッケン</div>
+      </div>
+      <div>
+        <div class="num-badge ao">青</div>
+        <div class="num-badge-label">青ゼッケン</div>
+      </div>
+      <div>
+        <div class="num-badge ki">黄</div>
+        <div class="num-badge-label">黄ゼッケン</div>
+      </div>
+    </div>
+    <p style="margin-top:10px">挑戦者には試合開始前に識別色が割り当てられ、対応する色のゼッケンを着用する。最大三人まで同時出場が可能。賭博者はこの識別色をもとに賭け先を決定する。</p>
+  </div>
+  <div class="card">
+    <div class="card-t">スタッフ挑戦者について</div>
+    <p>挑戦者が不在または人数が足りない場合、スタッフが代役を務める。スタッフはランク別に設定されており、強さに応じて試合の難易度が異なる。各スタッフのプロフィールはカウンターにて確認できる。</p>
+  </div>
+</div>
+
+<!-- §3 -->
+<div class="sec" id="s3">
+  <div class="sec-head">
+    <div class="sec-num">§ 03</div>
+    <div class="sec-title">通貨「閃（せん）」</div>
+    <div class="sec-rule"></div>
+  </div>
+  <div class="card gold">
+    <p>この賭場では独自通貨 <strong style="color:var(--gold2)">「閃（せん）」</strong> を使用する。参加費を閃に変換し、以後のすべての取引は閃で行う。閃は実通貨と再交換できない。</p>
+  </div>
+  <div class="pts-hero">
+    <div class="pts-eq">1円 ＝ <strong>1</strong> 閃</div>
+    <div class="pts-note">※閃の場外持ち出し・換金は不可</div>
+  </div>
+  <div class="tbl-wrap">
+    <table>
+      <thead>
+        <tr><th>支払い額</th><th>受け取り閃数</th><th>対象</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>100円</td><td class="td-g">100 閃</td><td>賭博者コース①</td></tr>
+        <tr><td>200円</td><td class="td-g">200 閃</td><td>賭博者コース②</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="alert">
+    <div class="alert-icon">⛔</div>
+    <div class="alert-body">
+      <div class="alert-title">閃の持ち出し厳禁</div>
+      閃は会場内のみ有効。会場外への持ち出しは禁止する。閉場後に残った閃は無効となる。
+    </div>
+  </div>
+</div>
+
+<!-- §4 -->
+<div class="sec" id="s4">
+  <div class="sec-head">
+    <div class="sec-num">§ 04</div>
+    <div class="sec-title">賭けの流れ（賭博者）</div>
+    <div class="sec-rule"></div>
+  </div>
+  <div class="steps">
+    <div class="step">
+      <div class="step-n">1</div>
+      <div class="step-c">番号付きの席に着く。席番号は入場時にスタッフより案内される。</div>
+    </div>
+    <div class="step">
+      <div class="step-n">2</div>
+      <div class="step-c">挑戦者が登場し、それぞれに<strong>赤・青・黄</strong>のゼッケンが割り当てられる。</div>
+    </div>
+    <div class="step">
+      <div class="step-n">3</div>
+      <div class="step-c">
+        <strong>「どの色の挑戦者が勝利するか」</strong>を予想し、賭けたい識別色と閃数を決める。<br>
+        <span style="color:var(--text2);font-size:12px;">例：「赤の勝利に 30閃」「青に 50閃」など</span>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-n">4</div>
+      <div class="step-c">時間になるとスタッフが席まで来る。<strong>賭け先の番号と閃を直接スタッフに渡す。</strong></div>
+    </div>
+    <div class="step">
+      <div class="step-n">5</div>
+      <div class="step-c">試合を<strong>静粛に</strong>観戦する（私語・ヤジ禁止）。</div>
+    </div>
+    <div class="step">
+      <div class="step-n">6</div>
+      <div class="step-c">審判が判定を宣告。的中者にはスタッフがポイントを届ける。</div>
+    </div>
+  </div>
+  <div class="tbl-wrap">
+    <table>
+      <thead>
+        <tr><th>結果</th><th>受け取り</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>✅　予想的中</td>
+          <td class="td-g">賭けた閃数 × 2 を受け取る</td>
+        </tr>
+        <tr>
+          <td>⏱　時間切れ（引き分け）<br><span style="font-size:11px;color:var(--text3)">制限時間 1分30秒 到達</span></td>
+          <td style="color:var(--text2);font-weight:700">賭けた閃数 × 1（そのまま返却）</td>
+        </tr>
+        <tr>
+          <td>❌　予想外れ</td>
+          <td class="td-r">賭けた閃は没収</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="card">
+    <div class="card-t">賭博は全三試合制</div>
+    <p>試合は合計<strong style="color:var(--gold2)">三回</strong>行われる。賭博者は三試合を通じて閃を増やすことを目指す。</p>
+    <div style="margin-top:14px;display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;text-align:center">
+      <div style="background:var(--surface2);border:1px solid var(--border2);padding:10px 6px">
+        <div style="font-size:10px;color:var(--text3);letter-spacing:2px;font-family:'Noto Serif JP',serif;margin-bottom:6px">第一試合</div>
+        <div style="font-size:13px;color:var(--gold2);font-weight:700;letter-spacing:1px">入口に対して<br>右の席</div>
+      </div>
+      <div style="background:var(--surface2);border:1px solid var(--border2);padding:10px 6px">
+        <div style="font-size:10px;color:var(--text3);letter-spacing:2px;font-family:'Noto Serif JP',serif;margin-bottom:6px">第二試合</div>
+        <div style="font-size:13px;color:var(--gold2);font-weight:700;letter-spacing:1px">入口に対して<br>正面の席</div>
+      </div>
+      <div style="background:var(--surface2);border:1px solid var(--border2);padding:10px 6px">
+        <div style="font-size:10px;color:var(--text3);letter-spacing:2px;font-family:'Noto Serif JP',serif;margin-bottom:6px">第三試合</div>
+        <div style="font-size:13px;color:var(--gold2);font-weight:700;letter-spacing:1px">入口に対して<br>左の席</div>
+      </div>
+    </div>
+    <p style="margin-top:12px;font-size:12px;color:var(--text2)">各試合の開始前にスタッフが席に案内する。試合ごとに席のエリアが変わるため、指示があるまで移動はせずに待機すること。</p>
+  </div>
+  <div class="alert">
+    <div class="alert-icon">🪑</div>
+    <div class="alert-body">
+      <div class="alert-title">着席中の移動は厳禁</div>
+      席番号によって賭博の管理を行っている。スタッフの指示があるまで、いかなる理由があっても席を離れてはならない。
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-t">賭けのルール</div>
+    <ul>
+      <li>賭けるのは「どの識別色の挑戦者が勝利するか」の一点</li>
+      <li>賭ける閃数は自由（所持閃数の範囲内）</li>
+      <li><strong style="color:var(--red2)">各試合で必ず賭けること。賭けずに様子を見ることは認めない</strong></li>
+      <li>一局ごとに賭け直しが可能（前試合の結果を踏まえて変更できる）</li>
+      <li>賭けを宣言した後の変更は不可</li>
+    </ul>
+    <div class="secret-badge" style="margin-top:12px">
+      🔒　他の賭博者の賭け先・賭け額は一切公開されない
+    </div>
+    <p style="font-size:12px;color:var(--text2);margin-top:6px;">賭け先・賭け額はスタッフのみが把握する。他の参加者への表示は一切行わない。</p>
+  </div>
+  <div class="alert">
+    <div class="alert-icon">🍬</div>
+    <div class="alert-body">
+      <div class="alert-title">閃ゼロによる退場</div>
+      所持閃数が<strong>0</strong>になった賭博者は、情けの飴を一個受け取り、その場で退場となる。三試合を生き残るために閃を計画的に使え。
+    </div>
+  </div>
+</div>
+
+<!-- §5 -->
+<div class="sec" id="s5">
+  <div class="sec-head">
+    <div class="sec-num">§ 05</div>
+    <div class="sec-title">挑戦の流れ（挑戦者）</div>
+    <div class="sec-rule"></div>
+  </div>
+  <div class="steps">
+    <div class="step">
+      <div class="step-n">1</div>
+      <div class="step-c">参加費100円を支払う。二人または三人一組で出場し、それぞれに<strong>赤・青・黄</strong>の識別色が割り当てられ、対応するゼッケンを着用する。</div>
+    </div>
+    <div class="step">
+      <div class="step-n">2</div>
+      <div class="step-c">教室中央に進み、<strong>一言宣言</strong>を行う。</div>
+    </div>
+    <div class="step">
+      <div class="step-n">3</div>
+      <div class="step-c">目隠しを装着し、静粛の中で試技を行う。スタッフが指定する枠内での試技となる。</div>
+    </div>
+    <div class="step">
+      <div class="step-n">4</div>
+      <div class="step-c">審判の判定を受ける。</div>
+    </div>
+    <div class="step">
+      <div class="step-n">5</div>
+      <div class="step-c">
+        試合終了後、参加した挑戦者全員に<strong>参加賞として小さめのお菓子</strong>が配られる。<br>
+        <span style="color:var(--text2);font-size:12px;">勝者・敗者の別に関わらず、もらえる量は同じである。</span>
+      </div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-t">挑戦者の心得</div>
+    <ul>
+      <li>試技中はスタッフの指示に従うこと</li>
+      <li>試技の安全上、スタッフが指定した枠内で行動すること<br><span style="font-size:12px;color:var(--text2);">枠外に出た場合、スタッフの判断によりやり直しとなる場合がある</span></li>
+      <li>判定が出るまで目隠しを外さないこと</li>
+    </ul>
+  </div>
+</div>
+
+<!-- §6 -->
+<div class="sec" id="s6">
+  <div class="sec-head">
+    <div class="sec-num">§ 06</div>
+    <div class="sec-title">スタンプ特典</div>
+    <div class="sec-rule"></div>
+  </div>
+  <div class="stamp-box">
+    <div class="stamp-row">
+      <div class="stamp-c">★</div>
+      <div class="stamp-c">★</div>
+      <div class="stamp-c">★</div>
+    </div>
+    <div class="stamp-lbl">挑戦者として勝利するたびにスタンプ 1個</div>
+    <div class="stamp-reward">🎁　3勝達成で次回挑戦が無料！（参加費免除）</div>
+  </div>
+  <div class="card">
+    <p>スタンプカードは参加時にスタッフから受け取ること。スタンプの偽造・譲渡は禁止する。リピーターを目指して、ランク最上位へ挑め。</p>
+  </div>
+</div>
+
+<!-- §7 -->
+<div class="sec" id="s7">
+  <div class="sec-head">
+    <div class="sec-num">§ 07</div>
+    <div class="sec-title">景品交換</div>
+    <div class="sec-rule"></div>
+  </div>
+  <div class="alert gold-al">
+    <div class="alert-icon">🎁</div>
+    <div class="alert-body">
+      <div class="alert-title" style="color:var(--gold)">景品コーナー</div>
+      貯めた閃はカウンターでお菓子などの景品と交換できる。交換レートは当日のボードにて確認のこと。
+    </div>
+  </div>
+  <div class="card">
+    <p>交換レートは当日のボードにて確認のこと。景品の種類・内容も当日告知とする。</p>
+  </div>
+  <div class="alert">
+    <div class="alert-icon">🍬</div>
+    <div class="alert-body">
+      <div class="alert-title">景品の在庫について</div>
+      景品は十分な数量を用意しているが、状況によっては品切れとなる場合がある。予めご了承いただきたい。
+    </div>
+  </div>
+</div>
+
+<!-- §8 -->
+<div class="sec" id="s8">
+  <div class="sec-head">
+    <div class="sec-num">§ 08</div>
+    <div class="sec-title">ランキング</div>
+    <div class="sec-rule"></div>
+  </div>
+  <div class="card gold">
+    <p>ランキングは、<strong style="color:var(--gold2)">三試合すべてを終えた後の最終保有閃数</strong>をもとに決定し、ホワイトボードに掲示する。途中経過は反映されない。全三試合を終えた時点が、その者の順位確定となる。</p>
+    <p style="font-size:12px;color:var(--text2);margin-top:8px;">三試合が終わるまで順位はわからない。最後まで全力で戦い抜け。</p>
+  </div>
+  <div class="rank-item">
+    <div class="rank-n rank-g">🥇</div>
+    <div>
+      <div class="rank-prize">第一位</div>
+      <div class="rank-sub">最高の眼力と胆力を誇る者</div>
+    </div>
+  </div>
+  <div class="rank-item">
+    <div class="rank-n rank-s">🥈</div>
+    <div>
+      <div class="rank-prize">第二位</div>
+      <div class="rank-sub">惜しくも一歩及ばずの強者</div>
+    </div>
+  </div>
+  <div class="rank-item">
+    <div class="rank-n rank-b">🥉</div>
+    <div>
+      <div class="rank-prize">第三位</div>
+      <div class="rank-sub">三傑に名を連ねる猛者</div>
+    </div>
+  </div>
+  <div class="card" style="margin-top:12px">
+    <p>全三試合を終えたときに初めて順位が確定する。三試合を通じた眼力と胆力の総決算が、その者の真の実力を物語る。</p>
+  </div>
+</div>
+
+<!-- §9 -->
+<div class="sec" id="s9">
+  <div class="sec-head">
+    <div class="sec-num">§ 09</div>
+    <div class="sec-title">禁則事項</div>
+    <div class="sec-rule"></div>
+  </div>
+  <div class="alert">
+    <div class="alert-icon">🔇</div>
+    <div class="alert-body">
+      <div class="alert-title">試合中の私語・ヤジ禁止</div>
+      気配切りは静寂の中で行われる。試合開始から判定宣告まで、一切の発声・妨害行為を禁じる。違反者は退場処分とする場合がある。
+    </div>
+  </div>
+  <div class="alert">
+    <div class="alert-icon">⛔</div>
+    <div class="alert-body">
+      <div class="alert-title">閃の場外持ち出し禁止</div>
+      閃は会場内限定の通貨である。退場時に閃を持ち出すことを固く禁じる。
+    </div>
+  </div>
+  <div class="alert">
+    <div class="alert-icon">⚖️</div>
+    <div class="alert-body">
+      <div class="alert-title">審判の判定は絶対</div>
+      判定に関する質問はスタッフへ。しかし最終決定はスタッフに委ねられ、判定後の実力行使は一切認めない。
+    </div>
+  </div>
+  <div class="alert">
+    <div class="alert-icon">🚫</div>
+    <div class="alert-body">
+      <div class="alert-title">他参加者への妨害禁止</div>
+      他参加者への嫌がらせ・妨害行為は即刻退場処分とする。
+    </div>
+  </div>
+  <div class="alert">
+    <div class="alert-icon">⚠️</div>
+    <div class="alert-body">
+      <div class="alert-title">賭けすぎに注意</div>
+      これは楽しむための賭場である。全閃を一度に賭けるなど、過度な賭けは推奨しない。楽しい範囲で！
+    </div>
+  </div>
+</div>
+
+<!-- CLOSING -->
+<div class="closing">
+  <h3>一閃賭場　より</h3>
+  <p>
+    ご不明な点はスタッフ、またはルール説明員まで<br>お気軽にお申し付けください。<br><br>
+    <span class="accent">楽しく、正々堂々と。</span>
+  </p>
+</div>
+
+</main>
+
+<!-- ━━━ FOOTER ━━━ -->
+<footer>
+  <div class="footer-mark">⚔</div>
+  <div class="footer-line"></div>
+  <div class="footer-text">一閃賭場（いっせんとじょう）　公式ルールブック</div>
+</footer>
+
+<script>
+document.querySelectorAll('nav a').forEach(a=>{
+  a.addEventListener('click',e=>{
+    e.preventDefault();
+    const t=document.querySelector(a.getAttribute('href'));
+    if(t)t.scrollIntoView({behavior:'smooth'});
+  });
+});
+</script>
+</body>
+</html>
